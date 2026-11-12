@@ -1,17 +1,30 @@
 {
-    "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": {
+    "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": {
         "all": {
-            "BeforeCuts": 374.0,
-            "Trigger": 268.0,
-            "MET filters": 268.0,
-            "PV": 268.0,
-            "muon_veto": 229.0,
-            "elec_veto": 183.0,
-            "two_loose_jets": 182.0,
-            "dphi_min_cut": 163.0,
-            "signal_eff_sfs": 163.0,
-            "two_loose_jets_final": 163.0,
-            "ht_cut": 156.0
+            "BeforeCuts": 21.964,
+            "Trigger": 2.651821522309711,
+            "MET filters": 2.651821522309711,
+            "PV": 2.651821522309711,
+            "muon_veto": 2.5941732283464565,
+            "elec_veto": 2.0176902887139105,
+            "two_loose_jets": 0.28824146981627297,
+            "dphi_min_cut": 0.28824146981627297,
+            "signal_eff_sfs": 0.28824146981627297,
+            "two_loose_jets_final": 0.28824146981627297
+        }
+    },
+    "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 21.964,
+            "Trigger": 1.045904761904762,
+            "MET filters": 1.045904761904762,
+            "PV": 1.045904761904762,
+            "muon_veto": 1.045904761904762,
+            "elec_veto": 0.7553756613756614,
+            "two_loose_jets": 0.058105820105820105,
+            "dphi_min_cut": 0.058105820105820105,
+            "signal_eff_sfs": 0.058105820105820105,
+            "two_loose_jets_final": 0.058105820105820105
         }
     }
 }

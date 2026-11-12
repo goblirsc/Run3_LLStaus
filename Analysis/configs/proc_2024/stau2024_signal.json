@@ -10,22 +10,15 @@
     "compute_systematics": true,
     // "lumimask": "$CONFDIR/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt",
     "luminosity": 109.82, // fb-1
-    "crosssections": "$CONFDIR/../crosssections.json",
+    "crosssections": "$CONFDIR/../crossections.json",
     "apply_met_filters": true,
-    // idk what this is:
     "dxy_cut_study": false,
     "stau_properties_study": false,
-    "mc_lumifactors": "$CONFDIR/lumifactors_stau2018.json",
+    "mc_lumifactors": false,
     "exp_datasets": {
         // "DATA_MET": [
         //     "$STOREDIR/MET/crab_MET_2018A_UL/230415_105803/*/*.root",
-        //     "$STOREDIR/MET/crab_MET_2018B_UL/230415_105809/*/*.root",
-        //     "$STOREDIR/MET/crab_MET_2018C_UL/230415_105814/*/*.root",
-        //     "$STOREDIR/MET/crab_MET_2018D_UL/230414_182515/*/*.root"
         // ]
-        // "mc_datasets" : {
-        //     "Dataset: /DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8/RunIII2024Summer24NanoAODv15-Pilot2024wmLHEGS_150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
-        // }
     },
     "data_eras": {
         "2024C": [379412, 380252],
@@ -38,7 +31,7 @@
         "2024I-v1": [386409,  386797],
         "2024I-v2": [ 386798,  387121]
     },
-    // idk what this is:
+    // pdf uncertainity, number corresponds to pdf, central recommendation
     "pdf_types": {
         "91400": "Hessian",
         "306000": "Hessian",
@@ -46,19 +39,24 @@
         "325500": "Hessian",
         "320900" : "MC_Gaussian"
     },
-
     "mc_datasets": {
-        // all signal
-        // "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau10mm_v3/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau100mm_v3/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau1000mm_v3/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-700_ctau-10m_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau10m_v3/*/*/*/*/*.root"],
 
-        "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau1mm_v1/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
-        // "SMS-TStauStau_MStau-500_ctau-1000mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-400_ctau-0p1mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau0p1mm_v1/*/*/*/*/*.root"],
 
+        // "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau1mm_v1/*/*/*/*/*.root"],
+        // // // "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": ["/pnfs/desy.de/cms/tier2/store/user/svashish/LLSTauProduction_RUN3/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau1mm_v1/SUS-Run3Summer2024-stau500_lsp1_ctau1mm/NANOAOD/260918_162855/0000/ExoNanoAOD_1.root"]
+        "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
+        "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
+
+        // "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
+        // // // "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
+
+        // // "TTto2L2Nu" : ["$STOREDIR/TTto2L2Nu/*/*/*/*/*.root"],
+        // // "DYto2E-2Jets_Bin-MLL-50" : ["$STOREDIR/DYto2E-2Jets_Bin-MLL-50/*/*/*/*/*.root"],
+        // "WtoLNu-4Jets_Bin-1J": ["$STOREDIR/WtoLNu-4Jets_Bin-1J/*/*/*/*/*.root"],
+        // "WtoLNu-4Jets_Bin-3J" : ["$STOREDIR/WtoLNu-4Jets_Bin-3J/*/*/*/*/*.root"],
+        // "WtoLNu-4Jets_Bin-4J" : ["$STOREDIR/WtoLNu-4Jets_Bin-4J/*/*/*/*/*.root"],
     },
 
     // need to change this:
@@ -74,9 +72,8 @@
         "h1_sf",
         ["pt"]
     ],
-    "MET_trigger_plateau" : 250, // for 120-250 GeV - 2x stat. unc. of the MET_trigger_sfs is used, for > 250 - 1x stat. unc.
+    "MET_trigger_plateau" : 250, 
     "DY_jet_reweight": [
-        // Njets: [0, 1, 2, 3, 4]
         [  
             0.0812335727642246,
             0.0176155683054349,
@@ -86,7 +83,6 @@
         ]
     ],
     "W_jet_reweight": [
-        // Njets: [0, 1, 2, 3, 4]
         [
             0.747227241113348,
             0.187506782185615,
@@ -98,15 +94,15 @@
     "dataset_for_systematics": {
     },
     "dataset_trigger_order": [
-        "DATA_MET",
+        // "DATA_MET",
         "Displaced_ditau"
     ],
     "dataset_trigger_map": {
-        "DATA_MET": [
-            "HLT_PFMET120_PFMHT120_IDTight"
-        ],
+        // "DATA_MET": [
+        //     "HLT_PFMET120_PFMHT120_IDTight"
+        // ],
         "Displaced_ditau": [
-            "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1_noDxy",
+            "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1",
             // "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1"
         ]
     },
@@ -134,17 +130,15 @@
         ["eta", "phi"]
     ],
 
-    "jet_correction_mc": [
-        "$DATADIR/Summer19UL18_V5_MC_L1FastJet_AK4PFchs.txt",
-        "$DATADIR/Summer19UL18_V5_MC_L2Relative_AK4PFchs.txt",
-        "$DATADIR/Summer19UL18_V5_MC_L3Absolute_AK4PFchs.txt"
-    ],
-    "jet_uncertainty": "$DATADIR/Summer19UL18_V5_MC_Uncertainty_AK4PFchs.txt",
-    "jet_resolution": "$DATADIR/Summer19UL18_JRV2_MC_PtResolution_AK4PFchs.txt",
-    "jet_ressf": "$DATADIR/Summer19UL18_JRV2_MC_SF_AK4PFchs.txt",
+    // "jet_correction_mc": [
+    //     "$DATADIR/Summer19UL18_V5_MC_L1FastJet_AK4PFchs.txt",
+    //     "$DATADIR/Summer19UL18_V5_MC_L2Relative_AK4PFchs.txt",
+    //     "$DATADIR/Summer19UL18_V5_MC_L3Absolute_AK4PFchs.txt"
+    // ],
+    // "jet_uncertainty": "$DATADIR/Summer19UL18_V5_MC_Uncertainty_AK4PFchs.txt",
+    // "jet_resolution": "$DATADIR/Summer19UL18_JRV2_MC_PtResolution_AK4PFchs.txt",
+    // "jet_ressf": "$DATADIR/Summer19UL18_JRV2_MC_SF_AK4PFchs.txt",
     "smear_met": false,
-
-    // global selection before the analysis selection (used only for MET re-calc)
 
     "good_jet_id": "cut:tightlepveto",
     "good_jet_puId": "skip", // not used
@@ -154,8 +148,6 @@
     "good_jet_pt_min": 20,
     "good_jet_veto_lepton": false,
     "btag": "deepjet:medium",
-
-    // slepton analysis selection
 
     // muon veto
     "muon_veto_pt_min"   :  20,
@@ -175,32 +167,23 @@
     "jet_pt_min"   :  30,
     "jet_eta_min"  : -2.1,
     "jet_eta_max"  :  2.1,
-    "jet_jetId"    :  6, // tight lepton veto -> is this Jet_genJetIdx
-    "jet_dxy_min"  :  0.2, // cm
+    // "jet_jetId"    :  6, // tight lepton veto -> is this Jet_genJetIdx
+    "jet_dxy_min"  :  0.5, // cm
     
     // pfCand selection:
     "pfcand_pt"         : 1.0,
     "pfcand_eta_min"    : -2.4,
     "pfcand_eta_max"    : 2.4,
-    // "track"             : "hasTrackDetails",
 
-    // MET cut
     "MET_cut"   : 120,
-    
-    // deltaphi between jets
     "dphi_j1j2" : 0.5, // >=0.5
 
     // Tagger part
     "score_pass" : [0.05, 0.99],
     "loose_thr" : 0.05,
     "tight_thr" : 0.99,
+    // "hists": "$CONFDIR/../hists_configs/stau2024_signal_testing.json",
 
-    // "hists": "$CONFDIR/stau2018_signal_stau_hist.json",
-    // "hists": "$CONFDIR/stau2018_signal_hist.json",
-    "hists": "$CONFDIR/../hists_configs/stau2024_signal_testing.json"
-    
-    // There are many histograms in output data, for prediction we need only one 
-    // the load on histograms transfer one of the biggest bottleneck in the code
     // "cuts_to_histogram" : [
     //         "two_loose_jets_final",
     //         "ht_cut"

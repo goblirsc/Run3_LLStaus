@@ -1,0 +1,60 @@
+
+SMS-TStauStau_MStau-400_ctau-0p1mm_mLSP-1
+Cut                                Events    Total %
+----------------------------------------------------
+BeforeCuts                           3888     100.00
+Trigger                              2281      58.67
+MET filters                          2274      58.49
+PV                                   2274      58.49
+muon_veto                            1876      48.25
+elec_veto                            1474      37.91
+two_loose_jets                         95       2.44
+dphi_min_cut                           86       2.21
+signal_eff_sfs                         86       2.21
+two_loose_jets_final                   86       2.21
+
+
+SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1
+Cut                                Events    Total %
+----------------------------------------------------
+BeforeCuts                           3755     100.00
+Trigger                              2551      67.94
+MET filters                          2539      67.62
+PV                                   2539      67.62
+muon_veto                            2067      55.05
+elec_veto                            1661      44.23
+two_loose_jets                        109       2.90
+dphi_min_cut                          101       2.69
+signal_eff_sfs                        101       2.69
+two_loose_jets_final                  101       2.69
+
+
+SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1
+Cut                                Events    Total %
+----------------------------------------------------
+BeforeCuts                           3784     100.00
+Trigger                              2394      63.27
+MET filters                          2374      62.74
+PV                                   2374      62.74
+muon_veto                            1914      50.58
+elec_veto                            1592      42.07
+two_loose_jets                        226       5.97
+dphi_min_cut                          199       5.26
+signal_eff_sfs                        199       5.26
+two_loose_jets_final                  199       5.26
+
+
+SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1
+Cut                                Events    Total %
+----------------------------------------------------
+BeforeCuts                           3741     100.00
+Trigger                              2334      62.39
+MET filters                          2312      61.80
+PV                                   2312      61.80
+muon_veto                            1910      51.06
+elec_veto                            1560      41.70
+two_loose_jets                        150       4.01
+dphi_min_cut                          130       3.48
+signal_eff_sfs                        130       3.48
+two_loose_jets_final                  130       3.48
+

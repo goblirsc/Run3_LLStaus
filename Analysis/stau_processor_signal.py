@@ -6,8 +6,8 @@
 # Above command probably will need a little bit of time before all cuts are
 # applied once. This is because a chunk of events are processed simultaneously.
 # You change adjust the number of events in a chunk and thereby the memory
-from nis import match
-from unittest import result
+# from nis import match
+# from unittest import result
 import pepper
 import awkward as ak
 from functools import partial
@@ -155,6 +155,7 @@ class Processor(pepper.ProcessorBasicPhysics):
 
         selector.set_column("Jet_select", self.getloose_jets)
         selector.set_column("PfCands", self.pfcand_valid)
+        # we never use this matching, run3 jets are already matched to pf candidate
         selector.set_column("Jet_lead_pfcand", partial(self.get_matched_pfCands, match_object="Jet_select", dR=0.4))
         selector.set_column("Jet_select", self.set_jet_dxy)
         selector.add_cut("two_loose_jets", self.has_two_jets)
@@ -179,11 +180,11 @@ class Processor(pepper.ProcessorBasicPhysics):
         if self.config["predict_yield"] and not is_mc:
             selector.set_multiple_columns(partial(self.predict_yield, weight=selector.systematics["weight"]))
         
-        ## Dummy basemark to have cut where regions were not categories yet
-        # selector.set_cat("control_region", {"RT0", "RT1", "RT2", "INC"})
-        # selector.set_multiple_columns(partial(self.categories_bins))
+        # Dummy basemark to have cut where regions were not categories yet
+        selector.set_cat("control_region", {"RT0", "RT1", "RT2", "INC"})
+        selector.set_multiple_columns(partial(self.categories_bins))
         selector.add_cut("two_loose_jets_final", lambda data: ak.Array(np.ones(len(data))))
-        selector.add_cut("ht_cut", self.ht_cut)
+        # selector.add_cut("ht_cut", self.ht_cut)
 
 
     def dxy_cut_study(self, selector, dsname, is_mc):
@@ -198,7 +199,7 @@ class Processor(pepper.ProcessorBasicPhysics):
         selector.add_cut("cut_separato2", lambda data: np.ones(len(data)))
 
         selector.set_column("PfCands", self.pfcand_valid)
-        selector.set_column("Jet_lead_pfcand", partial(self.get_matched_pfCands, match_object="Jet_select", dR=0.4))
+        # selector.set_column("Jet_lead_pfcand", partial(self.get_matched_pfCands, match_object="Jet_select", dR=0.4))
         selector.set_column("Jet_select", self.set_jet_dxy)
         selector.set_column("Jet_tau", partial(self.jet_tau, is_mc=is_mc))
 
@@ -213,8 +214,8 @@ class Processor(pepper.ProcessorBasicPhysics):
         selector.set_column("Jet_select", self.jet_selection)
         # match GenVisTau to Jet_select
         selector.set_column("Jet_select", partial(self.jet_tauvis_match, is_mc=is_mc))
-        selector.set_column("PfCands", self.pfcand_valid)
-        selector.set_column("Jet_lead_pfcand", partial(self.get_matched_pfCands, match_object="Jet_select", dR=0.4))
+        # selector.set_column("PfCands", self.pfcand_valid)
+        # selector.set_column("Jet_lead_pfcand", partial(self.get_matched_pfCands, match_object="Jet_select", dR=0.4))
         selector.set_column("Jet_select", self.set_jet_dxy)
         selector.add_cut("checkpoint", lambda data: np.ones(len(data)))
         selector.set_column("jet_score", self.jet_lead_score)
@@ -245,17 +246,36 @@ class Processor(pepper.ProcessorBasicPhysics):
     @zero_handler
     def jet_tauvis_match(self, data, is_mc):
         jets = data["Jet_select"]
-        if not is_mc: return jets
-        tau_vis = data.GenVisTau[ ((data.GenVisTau.pt > 30) & (abs(data.GenVisTau.eta) < 2.4) &
-                                  (data.GenVisTau.parent.hasFlags(["fromHardProcess"])))
-                                ]
-        matches_h, dRlist = jets.nearest(tau_vis, return_metric=True, threshold=0.3)
-        # add travel distance
-        jets["travel"] = matches_h.travel
-        jets["tr_travel"] = matches_h.tr_travel
-        tau_jet = jets[~ak.is_none(matches_h, axis=1)]
+        if not is_mc:
+            return jets
 
-        return tau_jet
+        gvt = data.GenVisTau
+        tau_vis = gvt[
+            (gvt.pt > 30)
+            & (abs(gvt.eta) < 2.4)
+            & (gvt.parent.hasFlags(["fromHardProcess"]))
+        ]
+
+        # All jet-tau pairs, shaped [event][jet][tau]
+        pairs = ak.cartesian({"jet": jets, "tau": tau_vis}, axis=1, nested=True)
+
+        deta = pairs.jet.eta - pairs.tau.eta
+        dphi = pairs.jet.phi - pairs.tau.phi
+        dphi = (dphi + np.pi) % (2 * np.pi) - np.pi
+        dr = np.sqrt(deta**2 + dphi**2)
+
+        # Index of the closest tau for each jet (None if the event has no tau)
+        idx = ak.argmin(dr, axis=-1, keepdims=True)
+        closest_tau = ak.firsts(pairs.tau[idx], axis=-1)   # [event][jet], None if no tau
+        min_dr = ak.firsts(dr[idx], axis=-1)
+
+        matched = ak.fill_none(min_dr < 0.3, False)
+
+        # Add travel distance of the matched tau to each jet
+        jets = ak.with_field(jets, ak.fill_none(closest_tau.travel, np.nan), "travel")
+        jets = ak.with_field(jets, ak.fill_none(closest_tau.tr_travel, np.nan), "tr_travel")
+
+        return jets[matched]
     
     ### Signal process study end <---
 
@@ -373,13 +393,27 @@ class Processor(pepper.ProcessorBasicPhysics):
     def jet_tau(self, data, is_mc):
         jets = data["Jet_select"]
         if not is_mc: return jets
-        tau_vis = data.GenVisTau[ ((data.GenVisTau.pt > 30) & (abs(data.GenVisTau.eta) < 2.4) &
-                                  (data.GenVisTau.parent.hasFlags(["fromHardProcess"])))
-                                ]
-        matches_h, dRlist = jets.nearest(tau_vis, return_metric=True, threshold=0.3)
-        tau_jet = jets[~ak.is_none(matches_h, axis=1)]
-        return tau_jet
-    
+
+        gvt = data.GenVisTau
+        tau_vis = gvt[
+            (gvt.pt > 30)
+            & (abs(gvt.eta) < 2.4)
+            & (gvt.parent.hasFlags(["fromHardProcess"]))
+        ]
+
+        # All jet-tau pairs per event, nested so the result is [event][jet][tau]
+        pairs = ak.cartesian({"jet": jets, "tau": tau_vis}, axis=1, nested=True)
+
+        deta = pairs.jet.eta - pairs.tau.eta
+        dphi = pairs.jet.phi - pairs.tau.phi
+        dphi = (dphi + np.pi) % (2 * np.pi) - np.pi  # wrap into [-pi, pi)
+        dr = np.sqrt(deta**2 + dphi**2)
+
+        # Closest tau for each jet; events with no tau give None, so fill with a large value
+        min_dr = ak.fill_none(ak.min(dr, axis=-1), 999.0)
+
+        return jets[min_dr < 0.3]
+        
     @zero_handler
     def jet_taupass(self, data, is_mc):
         jets = data["Jet_pass"]
@@ -556,6 +590,12 @@ class Processor(pepper.ProcessorBasicPhysics):
     @zero_handler
     def jet_basis(self,data):
         jets = data["JetCHS"]
+        n_before = ak.num(jets, axis=1)
+        logger.info(
+            f"Selecting CHS jets: "
+            f"exactly 2 = {ak.sum(n_before == 2)}, "
+            f">=2 = {ak.sum(n_before >= 2)}"
+        )
         return jets
     
     @zero_handler
@@ -578,7 +618,7 @@ class Processor(pepper.ProcessorBasicPhysics):
         jets = data["Jet_select"]
         n = ak.num(jets)
         logger.info(f"n jetsv: events={len(data)}, >=2 jets: {ak.sum(n>=2)}")
-        return n >= 2
+        return n == 2
     
     @zero_handler
     def has_small_dxy(self, data):
@@ -590,13 +630,32 @@ class Processor(pepper.ProcessorBasicPhysics):
     @zero_handler
     def getloose_jets(self, data):
         jets = data["Jet_select"]
+        n_before = ak.num(jets, axis=1)
+
+        # logger.info(
+        #     f"Before loose cut: "
+        #     f"exactly 2 = {ak.sum(n_before == 2)}, "
+        #     f">=2 = {ak.sum(n_before >= 2)}"
+        # )
         jets = jets[(jets.disTauTag_score1 >= self.config["loose_thr"])]
+        # n_after =  ak.num(jets, axis=1)
+        # logger.info(
+        #     f"after loose cut: "
+        #     f"exactly 2 = {ak.sum(n_after == 2)}, "
+        #     f">=2 = {ak.sum(n_after >= 2)}"
+        # )
         return jets
 
     @zero_handler
     def gettight_jets(self, data):
         jets = data["Jet_select"]
         jets = jets[(jets.disTauTag_score1 >= self.config["tight_thr"])]
+        n_after =  ak.num(jets, axis=1)
+        logger.info(
+            f"after tight cut: "
+            f"exactly 2 = {ak.sum(n_after == 2)}, "
+            f">=2 = {ak.sum(n_after >= 2)}"
+        )
         return jets
 
     @zero_handler
@@ -640,38 +699,69 @@ class Processor(pepper.ProcessorBasicPhysics):
     @zero_handler
     def set_jet_dxy(self, data):
         jets = data["Jet_select"]
-        # JetCHS already contains these quantities
-        jets["dxy"] = np.abs(jets.dxy)
-        jets["dz"] = np.abs(jets.dz)
-        jets["dxy_err"] = np.abs(jets.dxyerror)
-        jets["dz_err"] = np.abs(jets.dzerror)
-        jets["dxysig"] = jets.dxy / jets.dxy_err
+        lead_pf = data["Jet_lead_pfcand"] # this is a pfcandidate collection
+        # Mask jets with dxy nan (no selected pfcands matching)
+        # bad_jets = ak.is_none(data["jets"].dxy, axis=-1)
+        # jets = ak.mask(jets, ~bad_jets) # mask bad jets to keep correct shape
+        n_before = ak.num(jets, axis=1)
 
-        jets = jets[
-            jets.dxy >= self.config["jet_dxy_min"]
-        ]
-        # # Mask jets with dxy nan (no selected pfcands matching)
-        # bad_jets = ak.is_none(data["Jet_lead_pfcand"].dxy, axis=-1)
-        # jets = ak.mask(jets, ~bad_jets) # mask bad jets to keep coorect shape
-        # lead_pf = data["Jet_lead_pfcand"]
-        # jets["dz"] = np.abs(lead_pf.dz)
-        # jets["dxy"] = np.abs(lead_pf.dxy)
-        # jets["dxy_weight"] = np.abs(lead_pf.dxy_weight)
-        # jets["dxysig"] = np.abs(lead_pf.dxysig)
-        # jets["dxysig_weight"] = np.abs(lead_pf.dxysig_weight)
-        # jets["ip3d"] = lead_pf.ip3d
-        # #### Extra variables for the jet dxy cut study #### begin
-        # jets["dz_err"] = np.abs(lead_pf.dzError)
-        # jets["dxy_err"] = np.abs(lead_pf.dxyError)
-        # jets["vxy"] = np.sqrt(lead_pf.vx**2 + lead_pf.vy**2)
-        # jets["vz"] = np.abs(lead_pf.vz)
-        # jets["fromPV"] = lead_pf.fromPV
-        # jets["lostInnerHits"] = lead_pf.lostInnerHits
-        # #### end
+        logger.info(
+            f"Before dxy cut: "
+            f"exactly 2 = {ak.sum(n_before == 2)}, "
+            f">=2 = {ak.sum(n_before >= 2)}"
+        )
         # jets = jets[~bad_jets] # remove bad jets
-        # jets = jets[jets.dxy >= self.config["jet_dxy_min"]]
+        # n_goodjets = ak.num(jets, axis=1)
+        # logger.info(
+        #     f"After removing bad jets: "
+        #     f"exactly 2 = {ak.sum(n_goodjets == 2)}, "
+        #     f">=2 = {ak.sum(n_goodjets >= 2)}"
+        # )  
+        jets = jets[jets.dxy >= self.config["jet_dxy_min"]]
+        n_after = ak.num(jets, axis=1)
+
+        logger.info(
+            f"After dxy cut: "
+            f"exactly 2 = {ak.sum(n_after == 2)}, "
+            f">=2 = {ak.sum(n_after >= 2)}"
+        )  
         return jets
-    
+
+    # @zero_handler
+    # def set_jet_dxy(self, data):
+
+    #     jets = data["Jet_select"]
+
+    #     # n_before = ak.num(jets, axis=1)
+
+    #     # logger.info(
+    #     #     f"Before dxy cut: "
+    #     #     f"exactly 2 = {ak.sum(n_before == 2)}, "
+    #     #     f">=2 = {ak.sum(n_before >= 2)}"
+    #     # )
+
+    #     jets["dxy"] = np.abs(jets.dxy)
+    #     jets["dz"] = np.abs(jets.dz)
+    #     jets["dxy_err"] = np.abs(jets.dxyerror)
+    #     jets["dz_err"] = np.abs(jets.dzerror)
+
+    #     jets["dxysig"] = jets.dxy / jets.dxy_err
+
+    #     jets = jets[
+    #         jets.dxy >= self.config["jet_dxy_min"]
+    #     ]
+
+    #     # n_after = ak.num(jets, axis=1)
+
+    #     # logger.info(
+    #     #     f"After dxy cut: "
+    #     #     f"exactly 2 = {ak.sum(n_after == 2)}, "
+    #     #     f">=2 = {ak.sum(n_after >= 2)}"
+    #     # )
+
+    #     return jets
+
+
     @zero_handler
     def sum_jj(self, data):
 

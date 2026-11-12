@@ -12,7 +12,7 @@
     "apply_met_filters": true,
     "dxy_cut_study": false,
     "stau_properties_study": false,
-    "mc_lumifactors": "$CONFDIR/lumifactors_stau2018.json",
+    // "mc_lumifactors": "$CONFDIR/lumifactors_stau2018.json",
 
 
     "exp_datasets": {
