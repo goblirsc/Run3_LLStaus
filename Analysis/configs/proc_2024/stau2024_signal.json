@@ -41,9 +41,9 @@
     },
     "mc_datasets": {
         // "SMS-TStauStau_MStau-400_ctau-0p1mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau0p1mm_v1/*/*/*/*/*.root"],
-        "SMS-TStauStau_MStau-400_ctau-1mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau1mm_v1/*/*/*/*/*.root"],
-        "SMS-TStauStau_MStau-400_ctau-10mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
-        "SMS-TStauStau_MStau-400_ctau-100mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-400_ctau-1mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau1mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-400_ctau-10mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-400_ctau-100mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
         // "SMS-TStauStau_MStau-400_ctau-1000mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau400_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
 
         // "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau500_lsp1_ctau1mm_v1/*/*/*/*/*.root"],
@@ -187,6 +187,7 @@
     "dphi_j1j2" : 0.5, // >=0.5
 
     // Tagger part
+    // "score_pass" : [0.05, 0.1, 0.15, 0.2, 0.25, 0.30, 0.35, 0.40, 0.45, 0.5, 0.95, 0.9900, 0.9972, 0.9996],
     "score_pass" : [0.05, 0.99],
     "loose_thr" : 0.05,
     "tight_thr" : 0.99,

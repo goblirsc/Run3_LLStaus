@@ -1,16 +1,17 @@
-#python3 -m pepper.runproc --debug stau_processor_wjets.py stau2024_wjets.json
+#   python3 -m pepper.runproc stau_processor_wjets.py configs/proc_2024/stau2024_wjets.json  --debug 
+#   python3 -m pepper.runproc stau_processor_signal.py configs/proc_2024/stau2024_signal.json --debug           
+import pepper
 import logging
-import os
-import sys
+import awkward as ak
 from functools import partial
 import awkward as ak
 import numpy as np
-import mt2
-import coffea
 import pepper
-
+import sys
+import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from stau_processor_base import BaseProcessor, zero_handler  # noqa: E402
+
+from stau_processor_base import BaseProcessor  
 
 logger = logging.getLogger(__name__)
 
@@ -26,12 +27,17 @@ class Processor(BaseProcessor):
          uses different collection names / config keys than the signal one.
          Delete an override to switch WJets to the shared base version.
     """
+    def zero_handler(func):
+        def _function(self, data, *args, **kwargs):
+            if len(data) > 0: return func(self, data, *args, **kwargs)
+            else: return ak.Array([])
+        return _function
 
     def __init__(self, config, eventdir):
         super().__init__(config, eventdir)
 
-        if "pileup_reweighting" not in config:
-            logger.warning("No pileup reweigthing specified")
+        # if "pileup_reweighting" not in config:
+        #     logger.warning("No pileup reweigthing specified")
 
         if "muon_sf" not in config or len(config["muon_sf"]) == 0:
             logger.warning("No muon scale factors specified")
@@ -74,9 +80,9 @@ class Processor(BaseProcessor):
         # Triggers (shared with signal, see BaseProcessor)
         self.add_trigger(selector, dsname, is_mc)
 
-        if is_mc and "pileup_reweighting" in self.config:
-            selector.add_cut("Pileup reweighting", partial(
-                self.do_pileup_reweighting, dsname))
+        # if is_mc and "pileup_reweighting" in self.config:
+        #     selector.add_cut("Pileup reweighting", partial(
+        #         self.do_pileup_reweighting, dsname))
 
         # HEM 15/16 failure (2018)
         if self.config["year"] == "ul2018":
@@ -355,7 +361,7 @@ class Processor(BaseProcessor):
     # ==================================================================
     @zero_handler
     def MET_cut(self, data):  # base uses config["MET_cut"]
-        return data["MET"].pt > self.config["MET_pt"]
+        return data["PFMET"].pt > self.config["MET_pt"]
 
     def gen_lep(self, data):  # base version has no gen_tau
         gen_tau = data.GenPart[

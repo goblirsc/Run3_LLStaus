@@ -11,14 +11,12 @@
         "cuts": [
             "BeforeCuts",
             "Trigger",
+            "MET",
             "MET filters",
             "PV",
-            "muon_veto",
-            "elec_veto",
-            "two_loose_jets",
-            "dphi_min_cut",
-            "signal_eff_sfs",
-            "two_loose_jets_final"
+            "single_muon_tag",
+            "Lead_pass_trigger",
+            "muon_sfs"
         ]
     }
 }
