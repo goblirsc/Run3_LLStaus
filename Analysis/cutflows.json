@@ -1,30 +1,86 @@
 {
-    "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": {
+    "SMS-TStauStau_MStau-400_ctau-1mm_mLSP-1": {
         "all": {
-            "BeforeCuts": 21.964,
-            "Trigger": 2.651821522309711,
-            "MET filters": 2.651821522309711,
-            "PV": 2.651821522309711,
-            "muon_veto": 2.5941732283464565,
-            "elec_veto": 2.0176902887139105,
-            "two_loose_jets": 0.28824146981627297,
-            "dphi_min_cut": 0.28824146981627297,
-            "signal_eff_sfs": 0.28824146981627297,
-            "two_loose_jets_final": 0.28824146981627297
+            "BeforeCuts": 87.856,
+            "Trigger": 16.2267018469657,
+            "MET filters": 15.76308179419525,
+            "PV": 15.76308179419525,
+            "muon_veto": 15.531271767810026,
+            "elec_veto": 10.89507124010554,
+            "two_loose_jets": 0.6954300791556728,
+            "dphi_min_cut": 0.6954300791556728,
+            "signal_eff_sfs": 0.6954300791556728,
+            "two_loose_jets_final": 0.6954300791556728
         }
     },
-    "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": {
+    "SMS-TStauStau_MStau-400_ctau-10mm_mLSP-1": {
         "all": {
-            "BeforeCuts": 21.964,
-            "Trigger": 1.045904761904762,
-            "MET filters": 1.045904761904762,
-            "PV": 1.045904761904762,
-            "muon_veto": 1.045904761904762,
-            "elec_veto": 0.7553756613756614,
-            "two_loose_jets": 0.058105820105820105,
-            "dphi_min_cut": 0.058105820105820105,
-            "signal_eff_sfs": 0.058105820105820105,
-            "two_loose_jets_final": 0.058105820105820105
+            "BeforeCuts": 87.856,
+            "Trigger": 10.753208333333331,
+            "MET filters": 10.524416666666665,
+            "PV": 10.524416666666665,
+            "muon_veto": 10.524416666666665,
+            "elec_veto": 7.321333333333333,
+            "two_loose_jets": 0.686375,
+            "dphi_min_cut": 0.686375,
+            "signal_eff_sfs": 0.686375,
+            "two_loose_jets_final": 0.686375
+        }
+    },
+    "SMS-TStauStau_MStau-400_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 87.856,
+            "Trigger": 6.589199999999999,
+            "MET filters": 6.589199999999999,
+            "PV": 6.589199999999999,
+            "muon_veto": 6.589199999999999,
+            "elec_veto": 4.173159999999999,
+            "two_loose_jets": 0.21963999999999997,
+            "dphi_min_cut": 0.21963999999999997,
+            "signal_eff_sfs": 0.21963999999999997,
+            "two_loose_jets_final": 0.21963999999999997
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-1mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 1.9798535211267607,
+            "MET filters": 1.9798535211267607,
+            "PV": 1.9798535211267607,
+            "muon_veto": 1.9551053521126762,
+            "elec_veto": 1.3858974647887325,
+            "two_loose_jets": 0.04949633802816902,
+            "dphi_min_cut": 0.04949633802816902,
+            "signal_eff_sfs": 0.04949633802816902,
+            "two_loose_jets_final": 0.04949633802816902
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-10mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 1.2309494505494507,
+            "MET filters": 1.2309494505494507,
+            "PV": 1.2309494505494507,
+            "muon_veto": 1.1585406593406595,
+            "elec_veto": 0.8447692307692308,
+            "two_loose_jets": 0.12068131868131869,
+            "dphi_min_cut": 0.12068131868131869,
+            "signal_eff_sfs": 0.12068131868131869,
+            "two_loose_jets_final": 0.12068131868131869
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 0.576104918032787,
+            "MET filters": 0.528096174863388,
+            "PV": 0.528096174863388,
+            "muon_veto": 0.528096174863388,
+            "elec_veto": 0.4560830601092897,
+            "two_loose_jets": 0.0,
+            "dphi_min_cut": 0.0,
+            "signal_eff_sfs": 0.0,
+            "two_loose_jets_final": 0.0
         }
     }
 }

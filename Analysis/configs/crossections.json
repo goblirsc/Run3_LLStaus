@@ -6,12 +6,22 @@
     "WtoLNu-4Jets_Bin-4J": 417.8,
 
     "SMS-TStauStau_MStau-400_ctau-0p1mm_mLSP-1": 0.8,
+    "SMS-TStauStau_MStau-400_ctau-1mm_mLSP-1": 0.8,
+    "SMS-TStauStau_MStau-400_ctau-10mm_mLSP-1": 0.8,
+    "SMS-TStauStau_MStau-400_ctau-100mm_mLSP-1": 0.8,
+    "SMS-TStauStau_MStau-400_ctau-1000mm_mLSP-1": 0.8,
 
     "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": 0.2,
     "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": 0.2,
     "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": 0.2,
 
-    "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": 0.08,
-    "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": 0.08,
-    "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": 0.08,
+    "SMS-TStauStau_MStau-600_ctau-0p1mm_mLSP-1": 0.08,
+    "SMS-TStauStau_MStau-600_ctau-1mm_mLSP-1": 0.08,
+    "SMS-TStauStau_MStau-600_ctau-10mm_mLSP-1": 0.08,
+    "SMS-TStauStau_MStau-600_ctau-100mm_mLSP-1": 0.08,
+    "SMS-TStauStau_MStau-600_ctau-1000mm_mLSP-1": 0.08,
+
+    "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": 0.02,
+    "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": 0.02,
+    "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": 0.02,
 }
