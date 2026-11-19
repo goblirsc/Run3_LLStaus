@@ -127,7 +127,7 @@ class BaseProcessor(pepper.ProcessorBasicPhysics):
 
     @zero_handler
     def MET_cut(self, data):
-        return data["MET"].pt > self.config["MET_cut"]
+        return data["PFMET"].pt > self.config["MET_cut"]
 
     # ------------------------------------------------------------------
     # Gen-level helpers

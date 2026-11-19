@@ -80,6 +80,7 @@ class Processor(BaseProcessor):
             return
 
         # Triggers, MET filters, PV 
+        selector.add_cut("MET", self.MET_cut)
         self.add_trigger(selector, dsname, is_mc)
         self.add_quality_cuts(selector, is_mc)
         selector.add_cut("MET_trigger_pass", self.met_trigger_pass)
