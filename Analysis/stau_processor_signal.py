@@ -90,6 +90,7 @@ class Processor(BaseProcessor):
 
         selector.set_column("Lepton", lambda data: ak.Array([[]] * len(data)))
         selector.set_column("Jet_select", self.jet_basis)
+        selector.set_multiple_columns(self.missing_energy)
 
         if self.config["dxy_cut_study"]:
             self.dxy_cut_study(selector, dsname, is_mc)
@@ -103,7 +104,7 @@ class Processor(BaseProcessor):
         selector.add_cut("two_loose_jets", self.has_two_jets)
 
         selector.set_column("sum_jj", self.sum_jj)
-        selector.set_multiple_columns(self.missing_energy)
+        # selector.set_multiple_columns(self.missing_energy) # sets HT_valid, HT_miss_valid, HT and HT_miss (all defined in base processor)
         selector.set_multiple_columns(self.mt_jets)
         selector.set_column("dphi_jet1_jet2", self.dphi_jet1_jet2)
         selector.set_column("dr_jet1_jet2", self.dr_jet1_jet2)
@@ -122,9 +123,13 @@ class Processor(BaseProcessor):
             selector.set_multiple_columns(partial(self.predict_yield, weight=selector.systematics["weight"]))
 
         # Dummy basemark to have cut where regions were not categories yet
-        # selector.set_cat("control_region", {"RT0", "RT1", "RT2", "INC"})  # setting categories
-        # selector.set_multiple_columns(partial(self.categories_bins))
-        selector.add_cut("two_loose_jets_final", lambda data: ak.Array(np.ones(len(data))))
+        selector.set_multiple_columns(partial(self.categories_bins))
+        selector.set_cat("control_region", {"RT0", "RT1", "RT2"})  # setting categories, removed the INCLUSIVE CATEGORY: pepper error: needs an event to fit into exactly 1 category
+        
+        # selector.add_cut("two_loose_jets_final", lambda data: ak.ones_like(data.event, dtype=bool))
+        # selector.add_cut("two_loose_jets_final", lambda data: ak.Array(np.ones(len(data))))
+        # selector.add_cut("ht_cut", self.ht_cut)
+
 
     # ------------------------------------------------------------------
     # Signal-only selection pieces
@@ -202,22 +207,23 @@ class Processor(BaseProcessor):
 
         return jets[matched]
 
-    ### Signal process study end <---
-
     def categories_bins(self, data):
         if len(data) == 0:
             return {
                 "RT0": ak.Array([]),
                 "RT1": ak.Array([]),
-                "RT2": ak.Array([]),
-                "INC": ak.Array([])}
+                "RT2": ak.Array([]) 
+                }
+                # "INC": ak.Array([])}
         jets = data["Jet_select"]
         jets = jets[(jets.disTauTag_score1 >= self.config["tight_thr"])]
         n_tight = ak.num(jets)
         RT0 = (n_tight == 0)
         RT1 = (n_tight == 1)
         RT2 = (n_tight == 2)
-        return {"RT0": RT0, "RT1": RT1, "RT2": RT2, "INC": np.ones(len(data))}
+        return {"RT0": RT0, "RT1": RT1, "RT2": RT2} # "INC": np.ones(len(data))
+
+    ### Signal process study end <---
 
     # ------------------------------------------------------------------
     # Lepton vetoes (signal region vetoes leptons; WJets selects a muon)
@@ -245,6 +251,24 @@ class Processor(BaseProcessor):
         return jets
 
     @zero_handler
+    def set_jet_dxy(self, data):
+        jets = data["Jet_select"]
+        n_before = ak.num(jets, axis=1)
+        logger.info(
+            f"Before dxy cut: "
+            f"exactly 2 = {ak.sum(n_before == 2)}, "
+            f">=2 = {ak.sum(n_before >= 2)}"
+        )
+        jets = jets[jets.dxy >= self.config["jet_dxy_min"]]
+        n_after = ak.num(jets, axis=1)
+        logger.info(
+            f"After dxy cut: "
+            f"exactly 2 = {ak.sum(n_after == 2)}, "
+            f">=2 = {ak.sum(n_after >= 2)}"
+        )
+        return jets
+
+    @zero_handler
     def ht_cut(self, data):
         return data["HT_valid"] > 150
 
@@ -261,6 +285,13 @@ class Processor(BaseProcessor):
     def has_jets(self, data):
         return ak.num(data["Jet_select"]) > 0
 
+    @zero_handler
+    def has_two_jets(self, data):
+        jets = data["Jet_select"]
+        n = ak.num(jets)
+        logger.info(f"n jets: events={len(data)}, >=2 jets: {ak.sum(n >= 2)}")
+        return n == 2
+        
     @zero_handler
     def has_small_dxy(self, data):
         jets = data["Jet_select"]

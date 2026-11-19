@@ -42,11 +42,19 @@ class BaseProcessor(pepper.ProcessorBasicPhysics):
             dsname,
             is_mc,
             self.config["dataset_trigger_map"],
-            self.config["dataset_trigger_order"])
-        selector.add_cut("Trigger", partial(
-            self.passing_trigger, pos_triggers, neg_triggers))
-        logger.info(f"Positive triggers: {pos_triggers}")
-        logger.info(f"Negative triggers: {neg_triggers}")
+            self.config["dataset_trigger_order"]
+        )
+
+        if self.config.get("apply_trigger", True):
+            selector.add_cut(
+                "Trigger",
+                partial(self.passing_trigger, pos_triggers, neg_triggers)
+            )
+            logger.info(f"Positive triggers: {pos_triggers}")
+            logger.info(f"Negative triggers: {neg_triggers}")
+
+        else:
+            logger.info("Trigger requirement disabled for offline efficiency denominator")
 
     def add_quality_cuts(self, selector, is_mc):
         selector.add_cut("MET filters", partial(self.met_filters, is_mc))
@@ -225,13 +233,6 @@ class BaseProcessor(pepper.ProcessorBasicPhysics):
         return jets
 
     @zero_handler
-    def has_two_jets(self, data):
-        jets = data["Jet_select"]
-        n = ak.num(jets)
-        logger.info(f"n jets: events={len(data)}, >=2 jets: {ak.sum(n >= 2)}")
-        return n == 2
-
-    @zero_handler
     def pfcand_valid(self, data):
         pfCands = data["PFCand"]
         is_good = (
@@ -263,25 +264,6 @@ class BaseProcessor(pepper.ProcessorBasicPhysics):
         pfCands = self.match_jet_to_pfcand(data, jet_name=match_object, pf_name="PfCands", dR=dR)
         pfCands_lead = ak.firsts(pfCands, axis=-1)
         return pfCands_lead
-
-    @zero_handler
-    def set_jet_dxy(self, data):
-        jets = data["Jet_select"]
-        n_before = ak.num(jets, axis=1)
-        logger.info(
-            f"Before dxy cut: "
-            f"exactly 2 = {ak.sum(n_before == 2)}, "
-            f">=2 = {ak.sum(n_before >= 2)}"
-        )
-        jets = jets[jets.dxy >= self.config["jet_dxy_min"]]
-        n_after = ak.num(jets, axis=1)
-        logger.info(
-            f"After dxy cut: "
-            f"exactly 2 = {ak.sum(n_after == 2)}, "
-            f">=2 = {ak.sum(n_after >= 2)}"
-        )
-        return jets
-
     # ------------------------------------------------------------------
     # Kinematic variables
     # ------------------------------------------------------------------

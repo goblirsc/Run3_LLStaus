@@ -84,14 +84,6 @@ class Processor(BaseProcessor):
         #     selector.add_cut("Pileup reweighting", partial(
         #         self.do_pileup_reweighting, dsname))
 
-        # HEM 15/16 failure (2018)
-        if self.config["year"] == "ul2018":
-            selector.add_cut("HEM_veto", partial(self.HEM_veto, is_mc=is_mc))
-
-        if is_mc and self.config["year"] in ("2016", "2017", "ul2016pre",
-                                             "ul2016post", "ul2017"):
-            selector.add_cut("L1Prefiring", self.add_l1_prefiring_weights)
-
         # MET cut
         selector.add_cut("MET", self.MET_cut)
 
@@ -104,11 +96,11 @@ class Processor(BaseProcessor):
         selector.add_cut("Lead_pass_trigger", self.lead_pass_trigger)
         selector.add_cut("muon_sfs", partial(self.get_muon_sfs, is_mc=is_mc))
 
-        # --- Further WJets steps (currently disabled) -------------------
-        # selector.set_column("muon_veto", self.muons_veto)
-        # selector.add_cut("loose_muon_veto", self.loose_muon_veto_cut)
-        # selector.set_column("electron_veto", self.electron_veto)
-        # selector.add_cut("loose_electron_veto", self.loose_electron_veto_cut)
+        # --- Further WJets steps -------------------
+        selector.set_column("muon_veto", self.muons_veto)
+        selector.add_cut("loose_muon_veto", self.loose_muon_veto_cut)
+        selector.set_column("electron_veto", self.electron_veto)
+        selector.add_cut("loose_electron_veto", self.loose_electron_veto_cut)
         # selector.set_column("mt_muon", partial(self.mt, name="Muon_tag"))
         # selector.add_cut("mt_muon", self.mt_muon_cut)
         # if is_mc:
@@ -117,6 +109,7 @@ class Processor(BaseProcessor):
         # selector.set_column("Jet_select", self.jet_selection)
         # if self.config["b-veto"]:
         #     selector.add_cut("b-veto", partial(self.b_tagged_jet_cut, name="Jet_select"))
+        # ---------------------- jet selections - to match baseline region ----------------------
         # selector.set_column("Jet_select", self.jet_veto_drop)
         # selector.add_cut("has_more_two_jets", self.has_more_two_jets)
         # selector.set_column("Jet_select", self.getloose_jets)

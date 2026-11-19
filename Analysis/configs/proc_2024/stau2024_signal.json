@@ -15,6 +15,7 @@
     "dxy_cut_study": false,
     "stau_properties_study": false,
     "mc_lumifactors": false,
+    "apply_trigger": true,
     "exp_datasets": {
         // "DATA_MET": [
         //     "$STOREDIR/MET/crab_MET_2018A_UL/230415_105803/*/*.root",
@@ -69,18 +70,21 @@
 
     // need to change this:
 
-    "pileup_reweighting": "$DATADIR/pileup.root",
-    "DY_ZptLO_weights": [
-        "$DATADIR/zptmass_weights_UL2018.root",
-        "zptmass_weight",
-        ["pt", "mass"]
-    ],
-    "MET_trigger_sfs": [
-        "/data/dust/user/sobhatta/work/LongLivedStaus/LLStaus_Run2/Analysis/output/trigger_sf_study/2018/trigger-eff-sfs_MET.root",
-        "h1_sf",
-        ["pt"]
-    ],
-    "MET_trigger_plateau" : 250, 
+    // "pileup_reweighting": "$DATADIR/pileup.root",
+    // "DY_ZptLO_weights": [
+    //     "$DATADIR/zptmass_weights_UL2018.root",
+    //     "zptmass_weight",
+    //     ["pt", "mass"]
+    // ],
+    // "MET_trigger_sfs": [
+    //     "/data/dust/user/sobhatta/work/LongLivedStaus/LLStaus_Run2/Analysis/output/trigger_sf_study/2018/trigger-eff-sfs_MET.root",
+    //     "h1_sf",
+    //     ["pt"]
+    // ],
+
+    "MET_trigger_plateau" : 0, 
+    "MET_cut"   : 0,
+
     "DY_jet_reweight": [
         [  
             0.0812335727642246,
@@ -102,17 +106,17 @@
     "dataset_for_systematics": {
     },
     "dataset_trigger_order": [
-        // "DATA_MET",
-        "Displaced_ditau"
+        "DATA_MET",
+        // "Displaced_ditau"
     ],
     "dataset_trigger_map": {
-        // "DATA_MET": [
-        //     "HLT_PFMET120_PFMHT120_IDTight"
-        // ],
-        "Displaced_ditau": [
-            "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1",
-            // "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1"
-        ]
+        "DATA_MET": [
+            "HLT_PFMET120_PFMHT120_IDTight"
+        ],
+        // "Displaced_ditau": [
+            // "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1",
+        //     // "HLT_DoubleMediumChargedIsoDisplacedPFTauHPS32_Trk1_eta2p1"
+        // ]
     },
 
     // data-driven n-pass yield prediction:
@@ -130,13 +134,13 @@
         "down": 0.85
     },
 
-    "skim_path" : "/afs/desy.de/user/m/mykytaua/nfscms/softLLSTAU/LLStaus_Run2/Analysis/jets_skims",
+    // "skim_path" : "/afs/desy.de/user/m/mykytaua/nfscms/softLLSTAU/LLStaus_Run2/Analysis/jets_skims",
 
-    "jet_veto_map" : [
-        "$DATADIR/hotjets-UL18.root",
-        "h2hot_ul18_plus_hem1516_and_hbp2m1",
-        ["eta", "phi"]
-    ],
+    // "jet_veto_map" : [
+    //     "$DATADIR/hotjets-UL18.root",
+    //     "h2hot_ul18_plus_hem1516_and_hbp2m1",
+    //     ["eta", "phi"]
+    // ],
 
     // "jet_correction_mc": [
     //     "$DATADIR/Summer19UL18_V5_MC_L1FastJet_AK4PFchs.txt",
@@ -183,7 +187,6 @@
     "pfcand_eta_min"    : -2.4,
     "pfcand_eta_max"    : 2.4,
 
-    "MET_cut"   : 120,
     "dphi_j1j2" : 0.5, // >=0.5
 
     // Tagger part
@@ -192,6 +195,7 @@
     "loose_thr" : 0.05,
     "tight_thr" : 0.99,
     // "hists": "$CONFDIR/../hists_configs/stau2024_signal_testing.json",
+    "hists": "$CONFDIR/../hists_configs/stau2024_met_trigger.json",
 
     // "cuts_to_histogram" : [
     //         "two_loose_jets_final",
