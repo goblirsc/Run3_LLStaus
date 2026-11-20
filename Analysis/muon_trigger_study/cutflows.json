@@ -1,0 +1,236 @@
+{
+    "SMS-TStauStau_MStau-400_ctau-1mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 87.856,
+            "Trigger": 18.985862975468148,
+            "MET filters": 18.91427603752663,
+            "PV": 18.91427603752663,
+            "single_muon_tag": 14.229710008347556,
+            "Lead_pass_trigger": 14.226645124154341,
+            "loose_muon_veto": 13.809164112978582,
+            "loose_electron_veto": 12.166824026014476,
+            "dy_gen_sfs": 12.166824026014476,
+            "atleast_two_loose_jets": 11.658928931138881,
+            "dphi_min_cut": 10.3379638438633,
+            "signal_eff_sfs": 10.3379638438633,
+            "atleast_two_loose_jets_final": 10.3379638438633,
+            "two_tight_jets": 0.4312729900452263
+        }
+    },
+    "SMS-TStauStau_MStau-400_ctau-10mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 87.856,
+            "Trigger": 18.821508828204937,
+            "MET filters": 18.569452175688415,
+            "PV": 18.569452175688415,
+            "single_muon_tag": 6.830413861715648,
+            "Lead_pass_trigger": 6.82263753553764,
+            "loose_muon_veto": 6.246670976619802,
+            "loose_electron_veto": 5.6624096697787545,
+            "dy_gen_sfs": 5.6624096697787545,
+            "atleast_two_loose_jets": 5.430467780976017,
+            "dphi_min_cut": 4.815826959866216,
+            "signal_eff_sfs": 4.815826959866216,
+            "atleast_two_loose_jets_final": 4.815826959866216,
+            "two_tight_jets": 0.44221374865609003
+        }
+    },
+    "SMS-TStauStau_MStau-400_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 87.856,
+            "Trigger": 18.68154299769577,
+            "MET filters": 18.5470731194599,
+            "PV": 18.5470731194599,
+            "single_muon_tag": 12.865825818586636,
+            "Lead_pass_trigger": 12.861308471114649,
+            "loose_muon_veto": 12.252306999135465,
+            "loose_electron_veto": 10.912755891802952,
+            "dy_gen_sfs": 10.912755891802952,
+            "atleast_two_loose_jets": 10.44999041240528,
+            "dphi_min_cut": 9.255414642545817,
+            "signal_eff_sfs": 9.255414642545817,
+            "atleast_two_loose_jets_final": 9.255414642545817,
+            "two_tight_jets": 0.11167303169119765
+        }
+    },
+    "SMS-TStauStau_MStau-500_ctau-1mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 21.964000000000002,
+            "Trigger": 5.027708047473794,
+            "MET filters": 5.005829254291295,
+            "PV": 5.005829254291295,
+            "single_muon_tag": 3.8352264510010405,
+            "Lead_pass_trigger": 3.834527506788401,
+            "loose_muon_veto": 3.726099187485476,
+            "loose_electron_veto": 3.272935028566763,
+            "dy_gen_sfs": 3.272935028566763,
+            "atleast_two_loose_jets": 3.1392803411681705,
+            "dphi_min_cut": 2.78620315417259,
+            "signal_eff_sfs": 2.78620315417259,
+            "atleast_two_loose_jets_final": 2.78620315417259,
+            "two_tight_jets": 0.1294150389508702
+        }
+    },
+    "SMS-TStauStau_MStau-500_ctau-10mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 21.964,
+            "Trigger": 4.950267376538231,
+            "MET filters": 4.872854595360014,
+            "PV": 4.872854595360014,
+            "single_muon_tag": 1.7932636638855466,
+            "Lead_pass_trigger": 1.791094872044785,
+            "loose_muon_veto": 1.6298564165729954,
+            "loose_electron_veto": 1.4728527141351067,
+            "dy_gen_sfs": 1.4728527141351067,
+            "atleast_two_loose_jets": 1.416080848406896,
+            "dphi_min_cut": 1.2580020982893196,
+            "signal_eff_sfs": 1.2580020982893196,
+            "atleast_two_loose_jets_final": 1.2580020982893196,
+            "two_tight_jets": 0.13476423782938993
+        }
+    },
+    "SMS-TStauStau_MStau-500_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 21.964,
+            "Trigger": 4.902678819091447,
+            "MET filters": 4.8582421552073605,
+            "PV": 4.8582421552073605,
+            "single_muon_tag": 3.354163714226899,
+            "Lead_pass_trigger": 3.352610372667905,
+            "loose_muon_veto": 3.1821866130525325,
+            "loose_electron_veto": 2.8184411749476843,
+            "dy_gen_sfs": 2.8184411749476843,
+            "atleast_two_loose_jets": 2.699985011953308,
+            "dphi_min_cut": 2.384351554814095,
+            "signal_eff_sfs": 2.384351554814095,
+            "atleast_two_loose_jets_final": 2.384351554814095,
+            "two_tight_jets": 0.036767039936552115
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-1mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 2.082731995289526,
+            "MET filters": 2.073024411291679,
+            "PV": 2.073024411291679,
+            "single_muon_tag": 1.611494415934861,
+            "Lead_pass_trigger": 1.6111042207193567,
+            "loose_muon_veto": 1.5640679611049426,
+            "loose_electron_veto": 1.3683200279936745,
+            "dy_gen_sfs": 1.3683200279936745,
+            "atleast_two_loose_jets": 1.3135981050435719,
+            "dphi_min_cut": 1.166388091921537,
+            "signal_eff_sfs": 1.166388091921537,
+            "atleast_two_loose_jets_final": 1.166388091921537,
+            "two_tight_jets": 0.060811333131455876
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-10mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 2.055649194121845,
+            "MET filters": 2.0205509581999257,
+            "PV": 2.0205509581999257,
+            "single_muon_tag": 0.7479819123581457,
+            "Lead_pass_trigger": 0.7470609026896287,
+            "loose_muon_veto": 0.6765426322869106,
+            "loose_electron_veto": 0.6092312509709565,
+            "dy_gen_sfs": 0.6092312509709565,
+            "atleast_two_loose_jets": 0.5844749549413005,
+            "dphi_min_cut": 0.5180956797958939,
+            "signal_eff_sfs": 0.5180956797958939,
+            "atleast_two_loose_jets_final": 0.5180956797958939,
+            "two_tight_jets": 0.058223346153117486
+        }
+    },
+    "SMS-TStauStau_MStau-600_ctau-100mm_mLSP-1": {
+        "all": {
+            "BeforeCuts": 8.7856,
+            "Trigger": 2.031344529729416,
+            "MET filters": 2.009290957872868,
+            "PV": 2.009290957872868,
+            "single_muon_tag": 1.376153966045509,
+            "Lead_pass_trigger": 1.3753117190801334,
+            "loose_muon_veto": 1.3030890417991667,
+            "loose_electron_veto": 1.1532466573406817,
+            "dy_gen_sfs": 1.1532466573406817,
+            "atleast_two_loose_jets": 1.105205333723528,
+            "dphi_min_cut": 0.9764191233994353,
+            "signal_eff_sfs": 0.9764191233994353,
+            "atleast_two_loose_jets_final": 0.9764191233994353,
+            "two_tight_jets": 0.01656788438469311
+        }
+    },
+    "WtoLNu-4Jets_Bin-1J": {
+        "all": {
+            "BeforeCuts": 1003864.62,
+            "Trigger": 161309.14275144608,
+            "MET filters": 161291.92125944534,
+            "PV": 161291.92125944534,
+            "single_muon_tag": 133682.8038234808,
+            "Lead_pass_trigger": 133682.8038234808,
+            "loose_muon_veto": 133594.49016215798,
+            "loose_electron_veto": 133584.15863202742,
+            "dy_gen_sfs": 133584.15863202742,
+            "atleast_two_loose_jets": 51951.52543597742,
+            "dphi_min_cut": 45002.11623674725,
+            "signal_eff_sfs": 45002.11623674725,
+            "atleast_two_loose_jets_final": 45002.11623674725,
+            "two_tight_jets": 0.5718387497406241
+        }
+    },
+    "WtoLNu-4Jets_Bin-3J": {
+        "all": {
+            "BeforeCuts": 94950.372,
+            "Trigger": 16095.415353201364,
+            "MET filters": 16091.207181053533,
+            "PV": 16091.207181053533,
+            "single_muon_tag": 13808.534460485234,
+            "Lead_pass_trigger": 13808.413866325145,
+            "loose_muon_veto": 13797.229583248383,
+            "loose_electron_veto": 13794.403858144491,
+            "dy_gen_sfs": 13794.403858144491,
+            "atleast_two_loose_jets": 5882.219818620218,
+            "dphi_min_cut": 5106.291700498869,
+            "signal_eff_sfs": 5106.291700498869,
+            "atleast_two_loose_jets_final": 5106.291700498869,
+            "two_tight_jets": 1.6239198900775298
+        }
+    },
+    "WtoLNu-4Jets_Bin-2J": {
+        "all": {
+            "BeforeCuts": 321882.42,
+            "Trigger": 53280.52949776771,
+            "MET filters": 53273.59439488149,
+            "PV": 53273.59439488149,
+            "single_muon_tag": 44873.73200997081,
+            "Lead_pass_trigger": 44873.73200997081,
+            "loose_muon_veto": 44828.631509100705,
+            "loose_electron_veto": 44828.631509100705,
+            "dy_gen_sfs": 44828.631509100705,
+            "atleast_two_loose_jets": 17853.556883007448,
+            "dphi_min_cut": 15544.908555635768,
+            "signal_eff_sfs": 15544.908555635768,
+            "atleast_two_loose_jets_final": 15544.908555635768,
+            "two_tight_jets": 0.0
+        }
+    },
+    "WtoLNu-4Jets_Bin-4J": {
+        "all": {
+            "BeforeCuts": 45882.796,
+            "Trigger": 7894.896111295119,
+            "MET filters": 7891.654981284913,
+            "PV": 7891.654981284913,
+            "single_muon_tag": 6837.342222786689,
+            "Lead_pass_trigger": 6837.342222786689,
+            "loose_muon_veto": 6830.77071716786,
+            "loose_electron_veto": 6829.699656683189,
+            "dy_gen_sfs": 6829.699656683189,
+            "atleast_two_loose_jets": 3048.872856358072,
+            "dphi_min_cut": 2645.812689794482,
+            "signal_eff_sfs": 2645.812689794482,
+            "atleast_two_loose_jets_final": 2645.812689794482,
+            "two_tight_jets": 1.8125924355008491
+        }
+    }
+}
