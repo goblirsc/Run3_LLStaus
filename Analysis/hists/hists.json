@@ -6,27 +6,53 @@
     "content": [
         [
             [
-                "MET_trigger_pass",
+                "two_tight_jets",
                 "PFMET_pt"
             ],
             [
-                "PV",
-                "PFMET_pt"
+                "two_tight_jets",
+                "HT_valid"
+            ],
+            [
+                "two_tight_jets",
+                "min_MET_MHT"
             ],
             [
                 "atleast_two_loose_jets_final",
                 "PFMET_pt"
+            ],
+            [
+                "atleast_two_loose_jets_final",
+                "HT_miss_valid"
+            ],
+            [
+                "atleast_two_loose_jets_final",
+                "min_MET_MHT"
+            ],
+            [
+                "two_tight_jets",
+                "HT_miss_valid"
+            ],
+            [
+                "atleast_two_loose_jets_final",
+                "HT_valid"
             ]
         ],
         [
-            "Cut_004_MET_trigger_pass_PFMET_pt.root",
-            "Cut_003_PV_PFMET_pt.root",
-            "Cut_013_atleast_two_loose_jets_final_PFMET_pt.root"
+            "Cut_015_two_tight_jets_PFMET_pt.root",
+            "Cut_015_two_tight_jets_HT_valid.root",
+            "Cut_015_two_tight_jets_min_MET_MHT.root",
+            "Cut_014_atleast_two_loose_jets_final_PFMET_pt.root",
+            "Cut_014_atleast_two_loose_jets_final_HT_miss_valid.root",
+            "Cut_014_atleast_two_loose_jets_final_min_MET_MHT.root",
+            "Cut_015_two_tight_jets_HT_miss_valid.root",
+            "Cut_014_atleast_two_loose_jets_final_HT_valid.root"
         ]
     ],
     "userdata": {
         "cuts": [
             "BeforeCuts",
+            "MET",
             "Trigger",
             "MET filters",
             "PV",

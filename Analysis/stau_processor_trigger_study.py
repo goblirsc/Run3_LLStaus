@@ -83,7 +83,7 @@ class Processor(BaseProcessor):
         selector.add_cut("MET", self.MET_cut)
         self.add_trigger(selector, dsname, is_mc)
         self.add_quality_cuts(selector, is_mc)
-        # selector.add_cut("MET_trigger_pass", self.met_trigger_pass)
+        selector.add_cut("MET_trigger_pass", self.met_trigger_pass)
         # one tight tag muon
         selector.set_column("Muon_tag", self.muons_tag)
         selector.add_cut("single_muon_tag", self.single_muon_tag_cut)

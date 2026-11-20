@@ -309,12 +309,14 @@ class BaseProcessor(pepper.ProcessorBasicPhysics):
         px = ak.sum(jets.pt * np.cos(jets.phi), axis=-1)
         py = ak.sum(jets.pt * np.sin(jets.phi), axis=-1)
         HT_miss = np.sqrt(px**2 + py**2)
-
+        min_MET_MHT = np.minimum(data["PFMET"].pt, HT_miss)
+        
         return {
             "HT_valid": HT_valid,
             "HT_miss_valid": HT_miss_valid,
             "HT": HT,
-            "HT_miss": HT_miss
+            "HT_miss": HT_miss,
+            "min_MET_MHT": min_MET_MHT
         }
 
     @zero_handler

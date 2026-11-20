@@ -63,9 +63,9 @@
         // "SMS-TStauStau_MStau-600_ctau-100mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau600_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
         // "SMS-TStauStau_MStau-600_ctau-1000mm_mLSP-1": ["$STOREDIR/Maximally_Mixed/SUS-RunIIISummer2024_EXONANO_stau600_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
 
-        // // "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
-        // // "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
-        // // "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-700_ctau-10mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau10mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-700_ctau-100mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau100mm_v1/*/*/*/*/*.root"],
+        // "SMS-TStauStau_MStau-700_ctau-1000mm_mLSP-1": ["$STOREDIR/SUS-RunIIISummer2024_EXONANO_stau700_lsp1_ctau1000mm_v1/*/*/*/*/*.root"],
 
         // "TTto2L2Nu" : ["$STOREDIR/TTto2L2Nu/*/*/*/*/*.root"],
         // // "DYto2E-2Jets_Bin-MLL-50" : ["$STOREDIR/DYto2E-2Jets_Bin-MLL-50/*/*/*/*/*.root"],
@@ -91,7 +91,7 @@
     "MET_trigger_plateau" : 0, 
     "MET_cut"   : 50,
 
-    "reference_trigger": "HLT_IsoMu24",
+    // "reference_trigger": "HLT_IsoMu24",
 
     "dataset_for_systematics": {},
     "dataset_trigger_order": [
@@ -237,8 +237,9 @@
     "histogram_format": "root",
 
     "cuts_to_histogram" : [
-            "PV",
-            "MET_trigger_pass",
-            "atleast_two_loose_jets_final"
+            // "PV",
+            // "MET_trigger_pass",
+            "atleast_two_loose_jets_final",
+            "two_tight_jets"
         ]
 }

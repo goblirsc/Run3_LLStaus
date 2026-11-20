@@ -6,11 +6,11 @@
     "content": [
         [
             [
-                "MET_trigger_pass",
+                "PV",
                 "PFMET_pt"
             ],
             [
-                "PV",
+                "MET_trigger_pass",
                 "PFMET_pt"
             ],
             [
@@ -19,8 +19,8 @@
             ]
         ],
         [
-            "Cut_005_MET_trigger_pass_PFMET_pt.root",
             "Cut_004_PV_PFMET_pt.root",
+            "Cut_005_MET_trigger_pass_PFMET_pt.root",
             "Cut_014_atleast_two_loose_jets_final_PFMET_pt.root"
         ]
     ],
